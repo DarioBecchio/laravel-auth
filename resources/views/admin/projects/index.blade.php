@@ -18,14 +18,15 @@
             </tr>
         </thead>
         <tbody>
+
             @forelse($projects as $project)
             
                 <tr class="">
-                    <td scope="row">{{project->id}}</td>
-                    <td><img src="{{project->cover_image}}" alt=""></td>
-                    <td>{{project->title}}</td>
-                    <td>{{project->slug}}</td>
-                    <td><a href="{{route(admin.projects.show , $project}}">View</a></td>
+                    <td scope="row">{{$project->id}}</td>
+                    <td><img src="{{$project->cover_image}}" alt=""></td>
+                    <td>{{$project->title}}</td>
+                    <td>{{$project->slug}}</td>
+                    <td><a href="{{('admin.projects.show' , $project)}}">Views</a></td>
                 </tr>
             @empty
                 <tr class="">
@@ -37,6 +38,5 @@
         </tbody>
     </table>
 </div>
-
 
 @endsection
