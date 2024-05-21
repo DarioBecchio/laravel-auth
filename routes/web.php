@@ -26,7 +26,7 @@ Route::middleware(['auth', 'verified'])
    Route::get('/' , [DashboardController::class,'dashboard'])->name('dashboard'); 
 });//http://localhost:8000/admin
 
-
+Route::resource();
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
