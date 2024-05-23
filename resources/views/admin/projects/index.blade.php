@@ -22,11 +22,11 @@
             @forelse($projects as $project)
             
                 <tr class="">
-                    <td scope="row">{{$project->id}}</td>
-                    <td><img src="{{$project->cover_image}}" alt=""></td>
-                    <td>{{$project->title}}</td>
-                    <td>{{$project->slug}}</td>
-                    <td><a href="{{('admin.projects.show' , $project)}}">Views</a></td>
+                    <td scope="col">{{$project->id}}</td>
+                    <td scope="col"><img src="{{$project->cover_image}}" alt=""></td>
+                    <td scope="col">{{$project->title}}</td>
+                    <td scope="col">{{$project->slug}}</td>
+                    <td scope="col"><a href="{{route('admin.projects.show' , $project)}}">Views</a></td>
                 </tr>
             @empty
                 <tr class="">
