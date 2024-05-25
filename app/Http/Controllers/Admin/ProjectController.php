@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -37,6 +38,8 @@ class ProjectController extends Controller
         $val_data = $request->validated();
         //dd($val_data);
         $val_data['slug'] = Str::slug($request-> title , '-');
+        $image_path = Storage::put('uploads', $request->cover_image);
+        dd($image_path);
         Project::create($val_data);
 
         return to_route('admin.projects.index');
@@ -63,7 +66,11 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        dd($request);
+        //dd($request->all());
+        $val_data = $request->validated();
+        $val_data['slug'] = Str::slug($request-> title , '-'); 
+        $project->update($val_data);
+        return to_route('admin.project.index')->with ('message', 'Post created successfully');
     }
 
     /**

@@ -4,9 +4,9 @@
 @section('content')
 
 <div class="container">
-    <form action="{{route('admin.projects.update' , $project)}}" method="post">
+    <form action="{{route('admin.projects.update' , $project)}}" method="push">
         @csrf
-
+        @method('PUT')
         <div class="mb-3">
             <label for="" class="form-label">Title</label>
             <input

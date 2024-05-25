@@ -2,6 +2,15 @@
 
 @section('content')
 
+<header class="bg-dark text-white py-4">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1>
+            Projects
+        </h1>
+        <a class="btn btn-primary" href="{{route('admin.projects.create')}}">Create</a>
+    </div>
+</header>
+
 <div
     class="table-responsive"
 >
