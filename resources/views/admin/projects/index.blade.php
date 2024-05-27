@@ -32,10 +32,20 @@
             
                 <tr class="">
                     <td scope="col">{{$project->id}}</td>
-                    <td scope="col"><img src="{{$project->cover_image}}" alt=""></td>
+                    <td scope="col">
+
+                        @if (Str::startsWith($project->cover_image, 'https://'))
+                        <img width="140" src="{{$project->cover_image}}" alt="">
+                        @else                    
+                        <img width="140" src="{{asset ('storage/' . $project->cover_image)}}" alt="">
+                        @endif
+                    </td>
                     <td scope="col">{{$project->title}}</td>
                     <td scope="col">{{$project->slug}}</td>
-                    <td scope="col"><a href="{{route('admin.projects.show' , $project)}}">Views</a></td>
+                    <td scope="col">
+                        <a href="{{route('admin.projects.show' , $project)}}">Views</a>
+                        <a href="{{route('admin.projects.edit' , $project)}}">Edit</a>
+                    </td>
                 </tr>
             @empty
                 <tr class="">

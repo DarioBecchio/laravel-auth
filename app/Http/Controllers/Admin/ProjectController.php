@@ -38,8 +38,12 @@ class ProjectController extends Controller
         $val_data = $request->validated();
         //dd($val_data);
         $val_data['slug'] = Str::slug($request-> title , '-');
-        $image_path = Storage::put('uploads', $request->cover_image);
-        dd($image_path);
+        if ($request->has('cover_image')) {
+
+            $image_path = Storage::put('uploads', $request->cover_image);
+            //dd($image_path);
+            $val_data['cover_image'] = $image_path;
+        }
         Project::create($val_data);
 
         return to_route('admin.projects.index');
@@ -58,6 +62,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        
         return view('admin.projects.edit' , compact('project'));
     }
 
@@ -69,7 +74,21 @@ class ProjectController extends Controller
         //dd($request->all());
         $val_data = $request->validated();
         $val_data['slug'] = Str::slug($request-> title , '-'); 
+        if($request->has('cover_image')){
+                //check if the current post has an image
+                if ($project->cover_image){
+                //if so, delete it   
+                Storage::delete($project->cover_image);
+                }
+                
+                //upload the new image
+                $image_path = Storage::put('uploads', $request->cover_image);
+                $val_data['cover_image'] = $image_path;
+            
+        }
+        //update
         $project->update($val_data);
+        //redirect
         return to_route('admin.project.index')->with ('message', 'Post created successfully');
     }
 

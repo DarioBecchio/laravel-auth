@@ -23,6 +23,7 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'title'=> 'required',
+            'cover_image' => 'nullable|max:500',
             'content'=> 'nullable'
         ];
     }
