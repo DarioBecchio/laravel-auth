@@ -6,8 +6,10 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
 
 class ProjectController extends Controller
 {
@@ -26,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        return view('admin.projects.create', ['categories'=> Category::all()]);
     }
 
     /**
@@ -46,7 +48,7 @@ class ProjectController extends Controller
         }
         Project::create($val_data);
 
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.index')->with('message', 'Post Created succesfully');
     }
 
     /**
@@ -62,8 +64,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        
-        return view('admin.projects.edit' , compact('project'));
+        $categories = Category::all();
+        return view('admin.projects.edit' , compact('project', 'categories'));
+        dd($project);
     }
 
     /**
@@ -86,10 +89,12 @@ class ProjectController extends Controller
                 $val_data['cover_image'] = $image_path;
             
         }
+        //dd($val_data);
         //update
         $project->update($val_data);
+        
         //redirect
-        return to_route('admin.project.index')->with ('message', 'Post created successfully');
+        return to_route('admin.projects.index')->with ('message', 'Post created successfully');
     }
 
     /**

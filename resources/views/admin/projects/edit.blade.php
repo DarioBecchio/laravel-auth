@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-    <form action="{{route('admin.projects.update' , $project)}}" method="push" enctype="multipart/form-data">
+    <form action="{{route('admin.projects.update' , $project)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -20,6 +20,21 @@
             />
             <small id="helpId" class="form-text text-muted">Add the project title here</small>
         </div>
+        
+        <div class="mb-3">
+            <label for="category_id" class="form-label">Category</label>
+            <select
+                class="form-select"
+                name="category_id"
+                id="category_id"
+            >
+                <option selected disabled>Select one</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}" {{ $category->id == old('category_id', $project->category?->id) ? 'selected' : ''}}>{{$category->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        
         <div class="d-flex gap-3">
             <img width="140" src="{{asset('storage/' . $project->cover_image)}}" alt="">
             <div class="mb-3">
