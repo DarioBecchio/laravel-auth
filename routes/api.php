@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ProjectControler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
@@ -25,10 +26,13 @@ use App\Models\Project;
 });*/
 
 //Option 2
-Route::get('projects', function (){
+/*Route::get('projects', function (){
     return response()->json([
-        'results'=>Project::orderByDesc('id')->get()
+        'success'=>true,
+        'results'=>Project::orderByDesc('id')->paginate(),
     ]);
-});
+});*/
+Route::get('projects', [ProjectControler::class,'index']);
 
 
+Route::get('projects/{project}', [ProjectControler::class,'show']);
