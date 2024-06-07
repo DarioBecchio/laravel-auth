@@ -29,8 +29,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        
-        return view('admin.projects.create', ['categories'=> Category::all()], ['technologies'=>Technology::all()]);
+        $categories = Category::all();
+        $technologies = Technology::all();
+        //dd($technologies);
+        return view('admin.projects.create', compact('categories','technologies'));
     }
 
     /**
@@ -38,7 +40,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $val_data = $request->validated();
         //dd($val_data);
         $val_data['slug'] = Str::slug($request-> title , '-');

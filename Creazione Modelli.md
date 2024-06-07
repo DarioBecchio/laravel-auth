@@ -36,7 +36,7 @@ use App\Models\Category;
 4- Adesso dobbiamo 'seedare', nel terminale scrivo:
 -php artisan ti
 Per recuperare i dati dal database
--App/Models/Category:all();
+-App\Models\Category::all();
 
 5- Creo la migrazione per la chiave esterna(relazione many to many):
 php artisan make:migration add_category_id_foreign_to_projects_table

@@ -29,6 +29,16 @@
             <small id="helpId" class="form-text text-muted">Add the project title here</small>
         </div>
         
+        <div class="d-flex gap-2 flex-wrap">
+        @foreach ($technologies as $technology)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="technology-{{$technology->id}}" name="technologies[]"/>
+                <label class="form-check-label" for="technology-{{$technology->id}}"> {{$technology->name}} </label>
+            </div>
+        @endforeach
+        </div>
+       
+
         <div class="mb-3">
             <label for="category_id" class="form-label">Category</label>
             <select
